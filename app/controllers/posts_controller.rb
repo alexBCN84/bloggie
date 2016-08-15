@@ -1,18 +1,22 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
+	#this shows all posts
 	def index
 		@posts = Post.all.order('created_at DESC')
 	end
 
+	#displays form for new post
 	def new
 		@post = Post.new
 	end
 
+	#looking for specific posts in the database and diplay them
 	def show
 		@post = Post.find(params[:id])
 	end
 
+	#creating new post
 	def create
 		@post = Post.new(post_params)
 
@@ -23,10 +27,12 @@ class PostsController < ApplicationController
 		end
 	end
 
+	#editing exising post
 	def edit
 		@post = Post.find(params[:id])
 	end
 
+	#updating existing post
 	def update
 		@post = Post.find(params[:id])
 
@@ -37,6 +43,7 @@ class PostsController < ApplicationController
 		end
 	end
 
+	#destroying exisint post
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
